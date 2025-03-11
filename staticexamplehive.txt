@@ -1,0 +1,20 @@
+test.txt
+1 ravi 100 hyd
+2 krishna 200 hyd
+3 fff 300 sec
+
+
+create external table temp(id int, name string, sal int) 
+partitioned by(city string) 
+location '/testing';
+load data inpath '/test.txt' into table temp partition(city='hyd');
+
+In HDFS the structure is /testing/temp/city=hyd/test.txt
+
+when i Query the table as "select * from temp";
+
+output :
+temp.id temp.name temp.sal temp.city  
+    1   ravi    100 hyd  
+    2   krishna 200 hyd  
+    3   fff     300 hyd  
