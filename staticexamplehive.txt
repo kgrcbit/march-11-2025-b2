@@ -5,8 +5,8 @@ test.txt
 
 
 create external table temp(id int, name string, sal int) 
-partitioned by(city string) 
-location '/testing';
+partitioned by(city string) row format delimited fields terminated by ',';
+
 load data inpath '/test.txt' into table temp partition(city='hyd');
 
 In HDFS the structure is /testing/temp/city=hyd/test.txt
